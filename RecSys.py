@@ -3,6 +3,7 @@ import pandas as pd
 import json
 from ast import literal_eval
 import collections
+import emoji
 
 
 data = pd.read_csv('Horror Movies List.csv')
@@ -27,7 +28,7 @@ sorted_tagsGenresDict = collections.OrderedDict(sorted_tagsGenres)
 
 
 similar_tags ={
-    'Thriller':['thriller', 'mystery', 'serial killer','fear','revenge','psychopath', 'torture', 'psychological thriller', 'suspense','escape','insanity','mental institution'],
+    'Thriller':['thriller', 'mystery', 'serial killer','fear', 'psychological thriller', 'suspense','escape'],
     
     'Mystery':['mystery', 'giallo','mystery killer','masked killer','stalker'],
     
@@ -78,6 +79,8 @@ similar_tags ={
     
 }
 
+fire=emoji.emojize(':fire:')
+
 new_col = ['Title','Rating','Popularity','Category','URL']
 
 def recSys(selected_tags):
@@ -96,10 +99,20 @@ def recSys(selected_tags):
             for st in sim_tags:
                 if st in m_tags:
                     if data.iloc[i]['Title'] not in movie_selected:
+                        movie_rating=data.iloc[i]['Rating']
+                        if movie_rating=='None':
+                            continue
                         movie_selected.append(data.iloc[i]['Title'])
                         movie_name=data.iloc[i]['Title']
-                        movie_rating=data.iloc[i]['Rating']
-                        movie_popularity=data.iloc[i]['Popularity']
+                        popularity_score=data.iloc[i]['Popularity']
+                        if popularity_score==125:
+                            movie_popularity=fire*3
+                        elif popularity_score==124:
+                            movie_popularity=fire*2
+                        elif popularity_score>=122:
+                            movie_popularity=fire
+                        else:
+                            movie_popularity=""
                         movie_tagsMatched= t
                         movie_url = data.iloc[i]['Url']
                         app_list = {'Title':movie_name,
@@ -114,7 +127,7 @@ def recSys(selected_tags):
 
 def recommendations(selected_tags):
     rec_movies_df=recSys(selected_tags)
-    sorted_rec=rec_movies_df.sort_values(by=['Popularity','Rating'],ascending=False)[:20]
+    sorted_rec=rec_movies_df.sort_values(by=['Popularity','Rating'],ascending=False)[:13]
     return sorted_rec
 
 

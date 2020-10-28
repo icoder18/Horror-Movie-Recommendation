@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, request
 import RecSys
+import emoji
 
 # __name__ = __main__
 app = Flask(__name__)
@@ -11,10 +12,11 @@ def hello():
 @app.route('/',methods=['POST'])
 def get_recommendations():
 	if request.method=='POST':
-		selected_tags=list([request.form['category']])
+		name=request.form['username']
+		selected_tags=request.form['category'].split(',')
 		movies=RecSys.recommendations(selected_tags)
 		
-	return render_template('index.html',your_result=True,data=movies.to_dict(orient='records'))
+	return render_template('index.html',your_result=True,your_name=name,data=movies.to_dict(orient='records'))
 
 
 if __name__ == '__main__':
