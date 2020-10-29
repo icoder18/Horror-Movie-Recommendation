@@ -1,8 +1,6 @@
 numpy
 pandas
 emoji
-ast
-collections
 scikit-learn
 Click==7.0
 Flask==1.1.1
