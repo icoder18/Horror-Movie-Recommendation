@@ -79,7 +79,7 @@ similar_tags ={
     
 }
 
-fire=emoji.emojize(':fire:')
+pumpkin=str('\U0001F383')
 
 new_col = ['Title','Rating','Popularity','Category','URL']
 
@@ -106,11 +106,11 @@ def recSys(selected_tags):
                         movie_name=data.iloc[i]['Title']
                         popularity_score=data.iloc[i]['Popularity']
                         if popularity_score==125:
-                            movie_popularity=fire*3
+                            movie_popularity=pumpkin*3
                         elif popularity_score==124:
-                            movie_popularity=fire*2
+                            movie_popularity=pumpkin*2
                         elif popularity_score>=122:
-                            movie_popularity=fire
+                            movie_popularity=pumpkin
                         else:
                             movie_popularity=""
                         movie_tagsMatched= t

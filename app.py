@@ -13,9 +13,12 @@ def hello():
 def get_recommendations():
 	if request.method=='POST':
 		name=request.form['username']
-		selected_tags=request.form['category'].split(',')
+		selected_tags=request.form.getlist('tags')
+		print(selected_tags)
+		print(type(selected_tags))
+		#selected_tags=request.form['category'].split(',')
 		movies=RecSys.recommendations(selected_tags)
-		
+		print(type(movies))
 	return render_template('index.html',your_result=True,your_name=name,data=movies.to_dict(orient='records'))
 
 

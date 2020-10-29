@@ -19,11 +19,38 @@
 
 .form-inline{
 	width: 50vw;
-	margin-left: 25vw;
+	margin: auto;
+	/* margin-left: 25vw; */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#tags-container{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	margin: 20px;
+}
+
+.chbox{
+	display: none;
+}
+
+.chlabel{
+	cursor: pointer;
+	border: 1px solid #343b40;
+	border-radius: 5%;
+	color:#343b40;
+	font-weight: 600;
+	margin: 3px;
+	padding: 7px;
 }
 
 .banner{
-	width: 100%;
+	width: 100%; 
 	height:auto;
 }
 
@@ -65,7 +92,75 @@
 
 		<form class="form-inline" method="POST" action="/" enctype="multipart/form-data">
 			<input type="text" name="username" placeholder="Enter name">
-			<input type="text" name="category" placeholder="Enter Category">
+			<!-- <input type="text" name="category" placeholder="Enter Category"> -->
+
+			<div id="tags-container">
+				<input type="checkbox" name="tags" value="Thriller" id="Thriller" class="chbox">
+				<label for="Thriller" class="chlabel">Thriller</label>
+
+				<input type="checkbox" name="tags" value="Mystery" id="Mystery" class="chbox">
+				<label for="Mystery" class="chlabel">Mystery</label>
+
+				<input type="checkbox" name="tags" value="Horror Comedy" id="Horror Comedy" class="chbox">
+				<label for="Horror Comedy" class="chlabel">Horror Comedy</label>
+
+				<input type="checkbox" name="tags" value="Sci-fi" id="Sci-fi" class="chbox">
+				<label for="Sci-fi" class="chlabel">Sci-fi</label>
+
+				<input type="checkbox" name="tags" value="Kidnapping" id="Kidnapping" class="chbox">
+				<label for="Kidnapping" class="chlabel">Kidnapping</label>
+
+				<input type="checkbox" name="tags" value="Pyschotronic" id="Pyschotronic" class="chbox">
+				<label for="Pyschotronic" class="chlabel">Pyschotronic</label>
+
+				<input type="checkbox" name="tags" value="Creatures and Monsters" id="Creatures and Monsters" class="chbox">
+				<label for="Creatures and Monsters" class="chlabel">Creatures and Monsters</label>
+
+				<input type="checkbox" name="tags" value="Vampires and Werewolves" id="Vampires and Werewolves" class="chbox">
+				<label for="Vampires and Werewolves" class="chlabel">Vampires and Werewolves</label>
+
+				<input type="checkbox" name="tags" value="Zombie" id="Zombie" class="chbox">
+				<label for="Zombie" class="chlabel">Zombie</label>
+
+				<input type="checkbox" name="tags" value="Serial Killer" id="Serial Killer" class="chbox">
+				<label for="Serial Killer" class="chlabel">Serial Killer</label>
+
+				<input type="checkbox" name="tags" value="Ghosts" id="Ghosts" class="chbox">
+				<label for="Ghosts" class="chlabel">Ghosts</label>
+
+				<input type="checkbox" name="tags" value="Haunted" id="Haunted" class="chbox">
+				<label for="Haunted" class="chlabel">Haunted</label>
+
+				<input type="checkbox" name="tags" value="Supernatural" id="Supernatural" class="chbox">
+				<label for="Supernatural" class="chlabel">Supernatural</label>
+
+				<input type="checkbox" name="tags" value="Demons and Exorcism" id="Demons and Exorcism" class="chbox">
+				<label for="Demons and Exorcism" class="chlabel">Demons and Exorcism</label>
+
+				<input type="checkbox" name="tags" value="Occult" id="Occult" class="chbox">
+				<label for="Occult" class="chlabel">Occult</label>
+
+				<input type="checkbox" name="tags" value="Aliens and Tech" id="Aliens and Tech" class="chbox">
+				<label for="Aliens and Tech" class="chlabel">Aliens and Tech</label>
+
+				<input type="checkbox" name="tags" value="Blood and violence" id="Blood and violence" class="chbox">
+				<label for="Blood and violence" class="chlabel">Blood and violence</label>
+
+				<input type="checkbox" name="tags" value="Found Footage" id="Found Footage" class="chbox">
+				<label for="Found Footage" class="chlabel">Found Footage</label>
+
+				<input type="checkbox" name="tags" value="Witch" id="Witch" class="chbox">
+				<label for="Witch" class="chlabel">Witch</label>
+
+				<input type="checkbox" name="tags" value="Apocalypse" id="Apocalypse" class="chbox">
+				<label for="Apocalypse" class="chlabel">Apocalypse</label>
+
+				<input type="checkbox" name="tags" value="Urban Legend" id="Urban Legend" class="chbox">
+				<label for="Urban Legend" class="chlabel">Urban Legend</label>
+			</div>
+
+			
+
 			<button type="submit" class="btn btn-dark" >Submit</button>
 		</form>
 		<br>
@@ -78,7 +173,7 @@
 				<h3>Here are some recommendations for you!</h3>
 			{% endif %}
 			<br>			
-			<p><img src="{{url_for('static', filename='fire.png')}}" class="fire" /> <b>Hotness Meter</b></p>
+			<p>{{'\U0001F383'}} <b>Hotness Meter</b></p>
 
 			{% block content %}
 			<table class="table">
@@ -123,6 +218,27 @@
 		</footer>
 		{% endif %}
 	</div>
+
+	<script>
+		let chboxes = document.querySelectorAll(".chbox");
+		let labels = document.querySelectorAll(".chlabel");
+		for(let i=0;i<21;i++){
+			chboxes[i].addEventListener("click",function(){
+				if(chboxes[i].checked == true){
+					// add style
+					labels[i].style.color = "white";
+					labels[i].style.background = "linear-gradient(45deg, rgba(130,105,179,1) -40%, rgba(112,10,140,1) 50%, rgba(130,105,179,1) 140%)";
+					labels[i].style.border = "1px solid transparent";
+				}
+				else{
+					//remove style
+					labels[i].style.color = "#343b40";
+					labels[i].style.border = "1px solid #343b40";
+					labels[i].style.background = "white";
+				}
+			})
+		}
+	</script>
 	
 </body>
 </html>
