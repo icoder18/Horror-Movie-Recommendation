@@ -1,7 +1,6 @@
 numpy
 pandas
 emoji
-json
 ast
 collections
 scikit-learn
